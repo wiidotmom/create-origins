@@ -5,13 +5,14 @@
   "name": "Create: Origins",
   "description": "Create compatibility for the Origins mod",
   "authors": [
-    "iGalaxy (Author)",
+    "igalaxy (Author)",
     "Fumple (Contributor)",
-    "EzequielDM (Contributor)"
+    "EzequielDM (Contributor)",
+    "Vercte (Contributor)"
   ],
   "contact": {
-    "sources": "https://github.com/malloryhayr/create-origins",
-    "homepage": "https://github.com/malloryhayr/create-origins"
+    "sources": "https://github.com/wiidotmom/create-origins",
+    "homepage": "https://github.com/wiidotmom/create-origins"
   },
   "license": "CC0",
   "icon": "assets/createorigins/icon.png",
