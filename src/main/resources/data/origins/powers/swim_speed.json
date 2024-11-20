@@ -1,0 +1,22 @@
+{
+  "type": "origins:conditioned_attribute",
+  "modifier": {
+    "attribute": "additionalentityattributes:water_speed",
+    "name": "Additional swim speed",
+    "value": 1.5,
+    "operation": "multiply_base"
+  },
+  "tick_rate": 10,
+  "condition": {
+    "type": "origins:equipped_item",
+    "equipment_slot": "feet",
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "tag": "createorigins:diving_boots"
+      }
+    },
+    "inverted": true
+  },
+  "loading_priority": 1
+}
