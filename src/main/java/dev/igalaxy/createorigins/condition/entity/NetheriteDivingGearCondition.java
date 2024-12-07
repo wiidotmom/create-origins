@@ -1,5 +1,6 @@
 package dev.igalaxy.createorigins.condition.entity;
 
+import dev.igalaxy.createorigins.CreateOrigins;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import io.github.apace100.calio.data.SerializableData;
 import net.minecraft.nbt.CompoundTag;
@@ -18,7 +19,7 @@ public class NetheriteDivingGearCondition {
 
 	public static ConditionFactory<Entity> getFactory() {
 		return new ConditionFactory<>(
-				new ResourceLocation("createorigins:netherite_diving_gear"),
+				CreateOrigins.id("netherite_diving_gear"),
 				new SerializableData(),
 				NetheriteDivingGearCondition::condition
 		);

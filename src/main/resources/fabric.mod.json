@@ -31,5 +31,8 @@
     "create": "*",
     "minecraft": "${minecraft_version}",
     "origins": ">=${origins_version}"
+  },
+  "suggests": {
+    "estrogen": ">=4.3"
   }
 }
