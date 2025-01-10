@@ -18,7 +18,7 @@ public class DivingHelmetItemMixin {
 	@Redirect(method = "breatheUnderwater", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isEyeInFluid(Lnet/minecraft/tags/TagKey;)Z", ordinal = 0))
 	private static boolean modifyBreatheUnderwater(LivingEntity entity, TagKey<Fluid> tagKey) {
 		if (OriginsPowerTypes.WATER_BREATHING.isActive(entity)) {
-			return !(entity.isEyeInFluid(tagKey) || entity.hasEffect(MobEffects.CONDUIT_POWER) || entity.level().isRaining());
+			return !(entity.isEyeInFluid(tagKey) || entity.hasEffect(MobEffects.CONDUIT_POWER) || entity.level().isRainingAt(entity.blockPosition()));
 		}
 		return entity.isEyeInFluid(tagKey);
 	}

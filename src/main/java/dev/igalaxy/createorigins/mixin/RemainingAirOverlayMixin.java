@@ -17,7 +17,7 @@ public class RemainingAirOverlayMixin {
 	@Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isEyeInFluid(Lnet/minecraft/tags/TagKey;)Z", ordinal = 0))
 	private static boolean modifyRenderRemainingAirOverlay(LocalPlayer entity, TagKey<Fluid> tagKey) {
 		if (OriginsPowerTypes.WATER_BREATHING.isActive(entity)) {
-			return !(entity.isEyeInFluid(tagKey) || entity.hasEffect(MobEffects.CONDUIT_POWER) || entity.level().isRaining());
+			return !(entity.isEyeInFluid(tagKey) || entity.hasEffect(MobEffects.CONDUIT_POWER) || entity.level().isRainingAt(entity.blockPosition()));
 		}
 		return entity.isEyeInFluid(tagKey);
 	}
