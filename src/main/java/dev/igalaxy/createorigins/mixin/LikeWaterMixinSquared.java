@@ -5,6 +5,7 @@ import com.bawnorton.mixinsquared.TargetHandler;
 import com.simibubi.create.content.equipment.armor.DivingBootsItem;
 
 import io.github.apace100.apoli.power.PowerType;
+
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
