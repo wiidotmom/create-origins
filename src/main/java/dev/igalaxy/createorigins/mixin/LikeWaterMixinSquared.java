@@ -2,8 +2,6 @@ package dev.igalaxy.createorigins.mixin;
 
 import com.bawnorton.mixinsquared.TargetHandler;
 
-import com.simibubi.create.AllItems;
-
 import com.simibubi.create.content.equipment.armor.DivingBootsItem;
 
 import io.github.apace100.apoli.power.PowerType;
@@ -27,10 +25,10 @@ public abstract class LikeWaterMixinSquared {
 		method = "@MixinSquared:Handler",
 		at = @At(
 				value = "INVOKE",
-				target = "io/github/apace100/apoli/power/PowerType.isActive(Lnet/minecraft/world/entity/Entity;)Z"
+				target = "Lio/github/apace100/apoli/power/PowerType;isActive(Lnet/minecraft/world/entity/Entity;)Z"
 		)
 	)
-	private boolean isActive(PowerType instance, Entity entity) {
+	private boolean isActive(PowerType<?> instance, Entity entity) {
 		if (entity instanceof LivingEntity && instance.isActive(entity)) {
 			ItemStack boots = ((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET);
 			if (boots.getItem() instanceof DivingBootsItem) {

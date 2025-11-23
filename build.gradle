@@ -38,6 +38,7 @@ repositories {
 	maven { url = "https://jitpack.io/" } // Mixin Extras, Fabric ASM
 	maven { url = "https://maven.tterrag.com/" } // Flywheel
 	maven { url = "https://maven.ladysnake.org/releases" }
+	maven { url = "https://maven.createmod.net/" } // Flywheel also
 	maven {
 		url = 'https://maven.cafeteria.dev'
 		content {
@@ -62,7 +63,7 @@ dependencies {
 	modImplementation("com.github.apace100:origins-fabric:v${origins_version}")
 
 	// Create - dependencies are added transitively
-	modImplementation("com.simibubi.create:create-fabric-${minecraft_version}:${create_version}")
+	modImplementation("com.simibubi.create:create-fabric:${create_version}")
 
 	// Development QOL
 	modLocalRuntime("maven.modrinth:lazydfu:${lazydfu_version}")
