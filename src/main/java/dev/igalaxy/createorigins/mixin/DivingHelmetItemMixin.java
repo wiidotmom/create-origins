@@ -27,12 +27,12 @@ public class DivingHelmetItemMixin {
 	@ModifyReturnValue(method = "canBreathe", at = @At(value = "RETURN", ordinal = 0))
 	private static boolean canBreathe(boolean original, LivingEntity entity) {
 		if(OriginsPowerTypes.WATER_BREATHING.isActive(entity)) {
-			return CreateOrigins.merlingNeedsBacktank(entity);
+			return !CreateOrigins.merlingNeedsBacktank(entity);
 		}
 		return original;
 	}
 
-	@ModifyVariable(method = "breatheUnderwater", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/equipment/armor/BacktankUtil;consumeAir(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;F)V"), ordinal = 0)
+	@ModifyVariable(method = "breatheUnderwater", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/equipment/armor/BacktankUtil;consumeAir(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;F)V"), name = "lavaDiving")
 	private static boolean modifyLavaDiving(boolean lavaDiving, LivingEntity entity) {
 		return lavaDiving && !CreateOrigins.merlingNeedsBacktank(entity);
 	}

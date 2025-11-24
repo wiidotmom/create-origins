@@ -2,6 +2,7 @@ package dev.igalaxy.createorigins;
 
 import com.simibubi.create.AllTags;
 
+import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.goggles.GogglesItem;
 
 import dev.igalaxy.createorigins.condition.entity.NetheriteDivingGearCondition;
@@ -18,6 +19,11 @@ import net.minecraft.resources.ResourceLocation;
 
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
+
+import static com.simibubi.create.content.equipment.armor.DivingHelmetItem.getWornItem;
 
 public class CreateOrigins implements ModInitializer {
 	public static final String ID = "createorigins";
@@ -39,6 +45,15 @@ public class CreateOrigins implements ModInitializer {
 						merling.hasEffect(MobEffects.CONDUIT_POWER) ||
 						((EntityAccessor)merling).callIsBeingRainedOn()
 				);
+	}
+
+	public static boolean hasFilledBacktank(LivingEntity entity) {
+		ItemStack helmet = getWornItem(entity);
+		if (helmet.isEmpty())
+			return false;
+
+		List<ItemStack> backtanks = BacktankUtil.getAllWithAir(entity);
+		return !backtanks.isEmpty();
 	}
 
 	public static ResourceLocation id(String path) {
