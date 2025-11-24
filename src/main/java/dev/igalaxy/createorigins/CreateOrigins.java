@@ -1,11 +1,12 @@
 package dev.igalaxy.createorigins;
 
 import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
 
+import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.goggles.GogglesItem;
 
 import dev.igalaxy.createorigins.condition.entity.NetheriteDivingGearCondition;
+import io.github.apace100.apoli.mixin.EntityAccessor;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeReference;
@@ -18,21 +19,20 @@ import net.minecraft.resources.ResourceLocation;
 
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
+import static com.simibubi.create.content.equipment.armor.DivingHelmetItem.getWornItem;
 
 public class CreateOrigins implements ModInitializer {
 	public static final String ID = "createorigins";
 	public static final String NAME = "Create: Origins";
-	public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
 	public static final PowerType<Power> GOGGLES = new PowerTypeReference<>(id("goggles"));
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Create addon mod [{}] is loading alongside Create [{}]!", NAME, Create.VERSION);
-
 		GogglesItem.addIsWearingPredicate(GOGGLES::isActive);
 
 		Registry.register(ApoliRegistries.ENTITY_CONDITION, NetheriteDivingGearCondition.getFactory().getSerializerId(), NetheriteDivingGearCondition.getFactory());
@@ -43,8 +43,17 @@ public class CreateOrigins implements ModInitializer {
 				!(
 						merling.isEyeInFluid(AllTags.AllFluidTags.DIVING_FLUIDS.tag) ||
 						merling.hasEffect(MobEffects.CONDUIT_POWER) ||
-						merling.level().isRainingAt(merling.blockPosition())
+						((EntityAccessor)merling).callIsBeingRainedOn()
 				);
+	}
+
+	public static boolean hasFilledBacktank(LivingEntity entity) {
+		ItemStack helmet = getWornItem(entity);
+		if (helmet.isEmpty())
+			return false;
+
+		List<ItemStack> backtanks = BacktankUtil.getAllWithAir(entity);
+		return !backtanks.isEmpty();
 	}
 
 	public static ResourceLocation id(String path) {

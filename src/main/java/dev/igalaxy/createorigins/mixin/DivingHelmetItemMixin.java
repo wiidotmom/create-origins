@@ -1,6 +1,7 @@
 package dev.igalaxy.createorigins.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.content.equipment.armor.DivingHelmetItem;
 
 import dev.igalaxy.createorigins.CreateOrigins;
@@ -23,15 +24,15 @@ public class DivingHelmetItemMixin {
 		return original;
 	}
 
-	@ModifyExpressionValue(method = "breatheUnderwater", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isEyeInFluid(Lnet/minecraft/tags/TagKey;)Z", ordinal = 0))
-	private static boolean shouldProvideAir(boolean original, LivingEntity entity) {
+	@ModifyReturnValue(method = "canBreathe", at = @At(value = "RETURN", ordinal = 0))
+	private static boolean canBreathe(boolean original, LivingEntity entity) {
 		if(OriginsPowerTypes.WATER_BREATHING.isActive(entity)) {
-			return CreateOrigins.merlingNeedsBacktank(entity);
+			return !CreateOrigins.merlingNeedsBacktank(entity);
 		}
 		return original;
 	}
 
-	@ModifyVariable(method = "breatheUnderwater", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/equipment/armor/BacktankUtil;consumeAir(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;F)V"), ordinal = 2)
+	@ModifyVariable(method = "breatheUnderwater", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/equipment/armor/BacktankUtil;consumeAir(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;F)V"), name = "lavaDiving")
 	private static boolean modifyLavaDiving(boolean lavaDiving, LivingEntity entity) {
 		return lavaDiving && !CreateOrigins.merlingNeedsBacktank(entity);
 	}

@@ -6,9 +6,9 @@
   "description": "Create compatibility for the Origins mod",
   "authors": [
     "igalaxy (Author)",
+    "Vercte (Maintainer)",
     "Fumple (Contributor)",
-    "EzequielDM (Contributor)",
-    "Vercte (Contributor)"
+    "EzequielDM (Contributor)"
   ],
   "contact": {
     "sources": "https://github.com/wiidotmom/create-origins",
@@ -28,8 +28,8 @@
   "depends": {
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": ">=${fabric_api_version}",
-    "create": "*",
+    "create": ">=6.0.7.0",
     "minecraft": "${minecraft_version}",
-    "origins": ">=${origins_version}"
+    "origins": ">=1.10.0"
   }
 }
